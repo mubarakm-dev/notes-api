@@ -11,7 +11,7 @@ A complete step-by-step guide from Day 0 to a working NestJS app with Postgres.
 | Day | Topic | Status |
 |-----|-------|--------|
 | **Day 0** | Environment Setup | ✅ **COMPLETED** |
-| **Day 1** | Config, Database, First Module | 🔄 **IN PROGRESS** |
+| **Day 1** | Config, Database, First Module | 🔄 **IN PROGRESS** (migrations working ✅) |
 | **Day 2** | DTOs, Validation, Error Handling | ⏳ Pending |
 | **Day 3** | Authentication Basics | ⏳ Pending |
 | **Day 4** | Advanced Queries & Testing | ⏳ Pending |
