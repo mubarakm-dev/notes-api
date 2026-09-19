@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseUUIDPipe, Post } from '@nestjs/common';
 import { NotesService } from './notes.service';
 import { CreateNoteDTO } from './dto/create-note.dto';
 
@@ -19,7 +19,7 @@ export class NotesController {
     }
 
     @Get(':id')
-    findOne(@Param('id') id: string){
+    findOne(@Param('id', ParseUUIDPipe) id: string){
         return this.notesService.findOne(id)
     }
    
