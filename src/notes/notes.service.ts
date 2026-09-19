@@ -2,6 +2,8 @@ import { Inject, Injectable } from '@nestjs/common';
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 import { DB } from '../database/database.module';
 import * as schema from "../database/schema"
+import { CreateNoteDTO } from './dto/create-note.dto';
+
 
 @Injectable()
 export class NotesService {
@@ -10,4 +12,14 @@ export class NotesService {
     async findAll(){
         return this.db.select().from(schema.notes)
     }
+
+    async create(dto:CreateNoteDTO, userId:string){
+        const [note] = await this.db.insert(schema.notes).values({
+            ...dto,
+            userId
+        }).returning()
+
+        return note;
+    }
 }
+
