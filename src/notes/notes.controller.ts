@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { NotesService } from './notes.service';
 import { CreateNoteDTO } from './dto/create-note.dto';
 
@@ -16,6 +16,11 @@ export class NotesController {
     const temporaryUserId = 'b7e90404-fcdb-42f7-91dd-2a413799b58b';
     return this.notesService.create(dto, temporaryUserId)
 
+    }
+
+    @Get(':id')
+    findOne(@Param('id') id: string){
+        return this.notesService.findOne(id)
     }
    
 }
