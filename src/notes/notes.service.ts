@@ -36,13 +36,13 @@ export class NotesService {
 
 
     async update(id: string, dto: UpdateNoteDto) {
-        const [note] = await this.db.update(schema.notes)
+        const [note] = await this.db.update(schema.notes).set({...dto, updatedAt: new Date()}).where(eq(schema.notes.id, id)).returning()
 
         if (!note) {
             throw new NotFoundException(`Note with id ${id} not found`)
         }
 
-        return 
+        return note
     }
 
 }

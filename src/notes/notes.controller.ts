@@ -1,6 +1,7 @@
-import { Body, Controller, Get, Param, ParseUUIDPipe, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseUUIDPipe, Patch, Post } from '@nestjs/common';
 import { NotesService } from './notes.service';
 import { CreateNoteDTO } from './dto/create-note.dto';
+import { UpdateNoteDto } from './dto/update-dto-note';
 
 @Controller('notes')
 export class NotesController {
@@ -21,6 +22,11 @@ export class NotesController {
     @Get(':id')
     findOne(@Param('id', ParseUUIDPipe) id: string){
         return this.notesService.findOne(id)
+    }
+
+    @Patch(":id")
+    update(@Param("id", ParseUUIDPipe) id:string, @Body() dto:UpdateNoteDto){
+        return this.notesService.update(id, dto )
     }
    
 }
