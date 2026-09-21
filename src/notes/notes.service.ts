@@ -4,7 +4,7 @@ import { DB } from '../database/database.module';
 import * as schema from "../database/schema"
 import { CreateNoteDTO } from './dto/create-note.dto';
 import { eq } from 'drizzle-orm';
-import { UpdateNoteDto } from './dto/update-dto-note';
+import { UpdateNoteDto } from './dto/update-note.dto';
 
 
 @Injectable()
