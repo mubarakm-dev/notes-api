@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, ParseUUIDPipe, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Param, ParseUUIDPipe, Patch, Post } from '@nestjs/common';
 import { NotesService } from './notes.service';
 import { CreateNoteDTO } from './dto/create-note.dto';
 import { UpdateNoteDto } from './dto/update-dto-note';
@@ -27,6 +27,13 @@ export class NotesController {
     @Patch(":id")
     update(@Param("id", ParseUUIDPipe) id:string, @Body() dto:UpdateNoteDto){
         return this.notesService.update(id, dto )
+    }
+
+    @Delete(':id')
+    @HttpCode(204)
+    remove(@Param('id', ParseUUIDPipe) id:string ){
+        return this.notesService.remove(id)
+
     }
    
 }
