@@ -4,17 +4,18 @@ import { DB } from '../database/database.module';
 import * as schema from "../database/schema"
 import { CreateNoteDTO } from './dto/create-note.dto';
 import { eq } from 'drizzle-orm';
+import { UpdateNoteDto } from './dto/update-dto-note';
 
 
 @Injectable()
 export class NotesService {
-    constructor(@Inject(DB) private readonly db:NodePgDatabase<typeof schema>){}
+    constructor(@Inject(DB) private readonly db: NodePgDatabase<typeof schema>) { }
 
-    async findAll(){
+    async findAll() {
         return this.db.select().from(schema.notes)
     }
 
-    async create(dto:CreateNoteDTO, userId:string){
+    async create(dto: CreateNoteDTO, userId: string) {
         const [note] = await this.db.insert(schema.notes).values({
             ...dto,
             userId
@@ -23,14 +24,26 @@ export class NotesService {
         return note;
     }
 
-    async findOne(id: string){
+    async findOne(id: string) {
         const [note] = await this.db.select().from(schema.notes).where(eq(schema.notes.id, id));
 
-        if(!note){
+        if (!note) {
             throw new NotFoundException(`Note with id ${id} not found`)
         }
 
         return note
     }
+
+
+    async update(id: string, dto: UpdateNoteDto) {
+        const [note] = await this.db.update(schema.notes)
+
+        if (!note) {
+            throw new NotFoundException(`Note with id ${id} not found`)
+        }
+
+        return 
+    }
+
 }
 
