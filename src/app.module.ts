@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { validationSchema } from './config/validation.schema';
 import { DatabaseModule } from './database/database.module';
 import { NotesModule } from './notes/notes.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -13,7 +14,8 @@ import { NotesModule } from './notes/notes.module';
       validationSchema,
     }),
     DatabaseModule,
-    NotesModule
+    NotesModule,
+    UsersModule
     
   ],
   controllers: [AppController],
