@@ -6,6 +6,7 @@ import { validationSchema } from './config/validation.schema';
 import { DatabaseModule } from './database/database.module';
 import { NotesModule } from './notes/notes.module';
 import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -15,7 +16,8 @@ import { UsersModule } from './users/users.module';
     }),
     DatabaseModule,
     NotesModule,
-    UsersModule
+    UsersModule,
+    AuthModule
     
   ],
   controllers: [AppController],
