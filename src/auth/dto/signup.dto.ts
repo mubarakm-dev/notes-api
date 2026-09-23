@@ -1,11 +1,7 @@
-import { IsEmail, IsNotEmpty, IsString, MinLength } from "class-validator";
-import { string } from "joi";
-
+import { IsEmail, IsString, MinLength } from "class-validator";
 
 export class SignupDto{
-     @IsEmail()
-    @IsString()
-    @IsNotEmpty()
+    @IsEmail()
     email!: string;
 
     @IsString()
