@@ -1,10 +1,18 @@
 import { Body, Controller, Delete, Get, HttpCode, Param, ParseUUIDPipe, Patch, Post, Req, UseGuards } from '@nestjs/common';
+import { Request } from 'express';
 import { NotesService } from './notes.service';
 import { CreateNoteDTO } from './dto/create-note.dto';
 import { UpdateNoteDto } from './dto/update-note.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
-
+interface RequestWithUser extends Request {
+    
+    user: {
+        userId: string;
+        email: string;
+        role: string;
+    };
+}
 
 @Controller('notes')
 @UseGuards(JwtAuthGuard)
@@ -17,7 +25,7 @@ export class NotesController {
     }
 
     @Post()
-    create(@Body()dto: CreateNoteDTO, @Req() req){
+    create(@Body()dto: CreateNoteDTO, @Req() req: RequestWithUser){
     return this.notesService.create(dto, req.user.userId)
 
     }
