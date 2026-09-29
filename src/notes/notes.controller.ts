@@ -1,9 +1,13 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, ParseUUIDPipe, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Param, ParseUUIDPipe, Patch, Post, Req, UseGuards } from '@nestjs/common';
 import { NotesService } from './notes.service';
 import { CreateNoteDTO } from './dto/create-note.dto';
 import { UpdateNoteDto } from './dto/update-note.dto';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+
+
 
 @Controller('notes')
+@UseGuards(JwtAuthGuard)
 export class NotesController {
     constructor(private readonly notesService: NotesService){}
 
@@ -13,9 +17,8 @@ export class NotesController {
     }
 
     @Post()
-    create(@Body()dto: CreateNoteDTO ){
-    const temporaryUserId = 'b7e90404-fcdb-42f7-91dd-2a413799b58b';
-    return this.notesService.create(dto, temporaryUserId)
+    create(@Body()dto: CreateNoteDTO, @Req() req){
+    return this.notesService.create(dto, req.user.userId)
 
     }
 
