@@ -6,7 +6,7 @@ import { UpdateNoteDto } from './dto/update-note.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 interface RequestWithUser extends Request {
-    
+
     user: {
         userId: string;
         email: string;
@@ -20,8 +20,8 @@ export class NotesController {
     constructor(private readonly notesService: NotesService){}
 
     @Get()
-    findAll(){
-        return this.notesService.findAll()
+    findAll(@Req() req: RequestWithUser){
+        return this.notesService.findAll(req.user.userId)
     }
 
     @Post()
@@ -31,19 +31,19 @@ export class NotesController {
     }
 
     @Get(':id')
-    findOne(@Param('id', ParseUUIDPipe) id: string){
-        return this.notesService.findOne(id)
+    findOne(@Param('id', ParseUUIDPipe)  id: string, @Req() req: RequestWithUser){
+        return this.notesService.findOne(id, req.user.userId)
     }
 
     @Patch(":id")
-    update(@Param("id", ParseUUIDPipe) id:string, @Body() dto:UpdateNoteDto){
-        return this.notesService.update(id, dto )
+    update(@Param("id", ParseUUIDPipe) id:string, @Req() req: RequestWithUser, @Body() dto:UpdateNoteDto){
+        return this.notesService.update(id, req.user.userId, dto )
     }
 
     @Delete(':id')
     @HttpCode(204)
-    remove(@Param('id', ParseUUIDPipe) id:string ){
-        return this.notesService.remove(id)
+    remove(@Param('id', ParseUUIDPipe) id:string, @Req() req: RequestWithUser ){
+        return this.notesService.remove(id, req.user.userId)
 
     }
    
