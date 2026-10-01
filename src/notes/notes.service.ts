@@ -3,16 +3,23 @@ import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 import { DB } from '../database/database.module';
 import * as schema from "../database/schema"
 import { CreateNoteDTO } from './dto/create-note.dto';
-import { and, eq } from 'drizzle-orm';
+import { and, asc, eq } from 'drizzle-orm';
 import { UpdateNoteDto } from './dto/update-note.dto';
+import { FindNotesDto } from './dto/find-notes.dto';
 
 
 @Injectable()
 export class NotesService {
     constructor(@Inject(DB) private readonly db: NodePgDatabase<typeof schema>) { }
 
-    async findAll(userId: string) {
-        return this.db.select().from(schema.notes).where(eq(schema.notes.userId, userId))
+    async findAll(userId: string, query: FindNotesDto) {
+        const {page = 1, limit = 10, sort = 'desc'} = query;
+        const offset = (page - 1) * limit
+        return this.db.select().from(schema.notes)
+        .where(eq(schema.notes.userId, userId))
+        .orderBy(sort === 'asc' ? asc(schema.notes.createdAt): (schema.notes.createdAt) )
+        .limit
+
     }
 
     async create(dto: CreateNoteDTO, userId: string) {
