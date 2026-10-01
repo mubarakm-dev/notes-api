@@ -14,10 +14,35 @@ A complete step-by-step guide from Day 0 to a working NestJS app with Postgres.
 | **Day 1** | Config, Database, First Module | ✅ **COMPLETED** |
 | **Day 2** | DTOs, Validation, Error Handling | ✅ **COMPLETED** |
 | **Day 3** | Authentication Basics | ✅ **COMPLETED** |
+| **Day 3.5** | Middleware, Interceptors, Exception Filters, Custom Decorators | 🔄 **IN PROGRESS** |
 | **Day 4** | Advanced Queries & Testing | ⏳ Pending |
 | **Day 5** | Relationships & Nested Routes | ⏳ Pending |
 | **Day 6** | Unit & E2E Testing | ⏳ Pending |
 | **Day 7** | Deployment Prep | ⏳ Pending |
+
+---
+
+## Day 3.5 — Filling the Last Core Gaps
+
+Added after a deep-dive discussion on the full NestJS request lifecycle. Not in the original plan, but closes the remaining gaps in core concept coverage before moving to Day 4.
+
+**What this covers:**
+1. `LoggerMiddleware` — logs every request (method, path, timestamp)
+2. `TransformInterceptor` — wraps successful responses: `{ success, data, timestamp }`
+3. Custom `HttpExceptionFilter` — wraps error responses to match: `{ success, statusCode, error, timestamp }`
+4. `@CurrentUser()` custom decorator — replaces `@Req() req` + `req.user.userId` throughout `NotesController`
+5. (Optional, discussed conceptually) Swagger/OpenAPI — auto-generated interactive API docs
+
+**Full request lifecycle, now fully covered hands-on:**
+```
+Middleware → Guards → Interceptors(in) → Pipes → Handler
+  → Interceptors(out) → Exception Filters → Response
+```
+
+**Deferred intentionally (not gaps, deliberate choices):**
+- Repository pattern — saved for the next project (banking app)
+- Structured logging (Pino/Winston) — noted, console.log sufficient for learning
+- Testing — still Day 6, as planned
 
 ---
 
