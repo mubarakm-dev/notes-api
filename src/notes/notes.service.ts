@@ -3,7 +3,7 @@ import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 import { DB } from '../database/database.module';
 import * as schema from "../database/schema"
 import { CreateNoteDTO } from './dto/create-note.dto';
-import { and, asc, eq } from 'drizzle-orm';
+import { and, asc, desc, eq } from 'drizzle-orm';
 import { UpdateNoteDto } from './dto/update-note.dto';
 import { FindNotesDto } from './dto/find-notes.dto';
 
@@ -17,8 +17,9 @@ export class NotesService {
         const offset = (page - 1) * limit
         return this.db.select().from(schema.notes)
         .where(eq(schema.notes.userId, userId))
-        .orderBy(sort === 'asc' ? asc(schema.notes.createdAt): (schema.notes.createdAt) )
-        .limit
+        .orderBy(sort === 'asc' ? asc(schema.notes.createdAt): desc(schema.notes.createdAt) )
+        .limit(limit)
+        .offset(offset)
 
     }
 
