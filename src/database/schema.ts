@@ -1,14 +1,15 @@
+import { relations } from "drizzle-orm";
 import { pgTable, uuid, text, timestamp } from "drizzle-orm/pg-core";
 
 
 
 
 export const users = pgTable("users", {
-    id: uuid('id').primaryKey().defaultRandom(),
-    email: text("email").notNull().unique(),
-    passwordHash: text("password_hash").notNull(),
-    role: text("role", {enum: ["user", "admin"]}).notNull().default('user'),
-    createdAt:timestamp('created_at').notNull().defaultNow(),
+  id: uuid('id').primaryKey().defaultRandom(),
+  email: text("email").notNull().unique(),
+  passwordHash: text("password_hash").notNull(),
+  role: text("role", { enum: ["user", "admin"] }).notNull().default('user'),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
 })
 
 export const notes = pgTable('notes', {
@@ -19,3 +20,17 @@ export const notes = pgTable('notes', {
   createdAt: timestamp('created_at').notNull().defaultNow(),
   updatedAt: timestamp('updated_at').notNull().defaultNow(),
 });
+
+
+export const usersRelations = relations(users, ({ many }) => ({
+  notes: many(notes)
+}))
+
+export const notesRelation = relations(notes, ({ one }) => ({
+  user: one(users, {
+    fields: [notes.userId],
+    references: [users.id],
+
+  }),
+
+}))
