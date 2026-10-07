@@ -5,7 +5,7 @@ import { UpdateNoteDto } from './dto/update-note.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { CurrentUser } from '../common/current-user/current-user.decorator';
 import type {CurrentUserPayload } from '../common/current-user/current-user.decorator';
-import { FindNotesDto } from './dto/find-notes.dto';
+import { FindNotesDto } from '../common/pagination/find-notes.dto';
 
 @Controller('notes')
 @UseGuards(JwtAuthGuard)

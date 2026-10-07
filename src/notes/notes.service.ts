@@ -5,7 +5,7 @@ import * as schema from "../database/schema"
 import { CreateNoteDTO } from './dto/create-note.dto';
 import { and, asc, desc, eq } from 'drizzle-orm';
 import { UpdateNoteDto } from './dto/update-note.dto';
-import { FindNotesDto } from './dto/find-notes.dto';
+import { FindNotesDto } from '../common/pagination/find-notes.dto';
 
 
 @Injectable()
