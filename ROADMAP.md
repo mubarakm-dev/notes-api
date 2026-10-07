@@ -16,7 +16,7 @@ A complete step-by-step guide from Day 0 to a working NestJS app with Postgres.
 | **Day 3** | Authentication Basics | ✅ **COMPLETED** |
 | **Day 3.5** | Middleware, Interceptors, Exception Filters, Custom Decorators | ✅ **COMPLETED** |
 | **Day 4** | Advanced Queries & Testing | ✅ **COMPLETED** |
-| **Day 5** | Relationships & Nested Routes | 🔄 **IN PROGRESS** |
+| **Day 5** | Relationships & Nested Routes | ✅ **COMPLETED** |
 | **Day 6** | Unit & E2E Testing | ⏳ Pending |
 | **Day 7** | Deployment Prep | ⏳ Pending |
 
