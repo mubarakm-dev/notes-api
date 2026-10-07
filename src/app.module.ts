@@ -8,6 +8,7 @@ import { NotesModule } from './notes/notes.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { LoggerMiddleware } from './common/logger/logger.middleware';
+import { AdminModule } from './admin/admin.module';
 
 @Module({
   imports: [
@@ -18,7 +19,8 @@ import { LoggerMiddleware } from './common/logger/logger.middleware';
     DatabaseModule,
     NotesModule,
     UsersModule,
-    AuthModule
+    AuthModule,
+    AdminModule
     
   ],
   controllers: [AppController],
