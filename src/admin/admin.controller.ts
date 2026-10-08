@@ -12,7 +12,6 @@ export class AdminController {
     constructor(private readonly adminService: AdminService) { }
 
     @Get('/users/:id/notes')
-    @Roles('admin')
     findUserNotes(@Param('id', ParseUUIDPipe) id: string, @Query() query: FindNotesDto) {
 
         return this.adminService.findUserWithNotes(id, query);
